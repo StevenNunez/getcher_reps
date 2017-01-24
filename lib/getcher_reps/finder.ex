@@ -2,7 +2,9 @@ defmodule GetcherReps.Finder do
   @api_key Application.get_env(:getcher_reps, :google_api_key)
   @base_url "https://www.googleapis.com/civicinfo/v2/representatives"
   def by_address(address) do
-    "#{@base_url}?key=#{@api_key}&address=#{address}"
+    url = "#{@base_url}?key=#{@api_key}&address=#{address}"
+    IO.inspect "About to send request to #{url}"
+    url
     |> URI.encode
     |> HTTPoison.get!
     |> get_officials
